@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/models/grocery_item.dart';
+import 'package:grocery_app/screens/dashboard/locationMap.dart';
 import 'package:grocery_app/screens/product_details/product_details_screen.dart';
 import 'package:grocery_app/styles/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,7 +27,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                  padded(locationWidget()),
+                  padded(locationWidget(context)),
                   SizedBox(
                     height: 15,
                   ),
@@ -34,7 +35,11 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 25,
                   ),
-                  padded(HomeBanner()),
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 0),
+                        child: HomeBanner(),
+                      ),
                   SizedBox(
                     height: 25,
                   ),
@@ -71,6 +76,13 @@ class HomeScreen extends StatelessWidget {
                         GroceryFeaturedCard(
                           groceryFeaturedItems[1],
                           color: AppColors.primaryColor,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        GroceryFeaturedCard(
+                          groceryFeaturedItems[2],
+                          color: Color(0xffFFC0CB),
                         ),
                         SizedBox(
                           width: 20,
@@ -155,22 +167,27 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget locationWidget() {
+  Widget locationWidget(BuildContext context) {
     String locationIconPath = "assets/icons/location_icon.svg";
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.asset(
-          locationIconPath,
-        ),
-        SizedBox(
-          width: 8,
-        ),
-        Text(
-          "Khartoum,Sudan",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        )
-      ],
+    return GestureDetector(
+      onTap:(){
+     Navigator.push(context,MaterialPageRoute(builder: (context)=>LocationMap()));
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            locationIconPath,
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          Text(
+            "Alkarama,Dubai",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
     );
   }
 }

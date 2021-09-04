@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:grocery_app/common_widgets/app_button.dart';
 import 'package:grocery_app/common_widgets/app_text.dart';
+import 'package:grocery_app/screens/account/login.dart';
 import 'package:grocery_app/screens/dashboard/dashboard_screen.dart';
 import 'package:grocery_app/styles/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final String imagePath = "assets/images/welcome_image.png";
-
+bool loginChecker=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +92,8 @@ class WelcomeScreen extends StatelessWidget {
       fontWeight: FontWeight.w600,
       padding: EdgeInsets.symmetric(vertical: 25),
       onPressed: () {
-        onGetStartedClicked(context);
+        loginChecker==true?
+        onGetStartedClicked(context):Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
       },
     );
   }
